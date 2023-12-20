@@ -35,10 +35,17 @@ class _MusicScreenState extends State<MusicScreen> {
                   CarouselSlider.builder(
                     carouselController: carouselController,
                     itemCount: 5,
-                    itemBuilder: (context, index, realIndex) => Container(
-                      height: MediaQuery.sizeOf(context).height * 0.10,
-                      width: MediaQuery.sizeOf(context).width * 0.80,
-                      color: Colors.primaries[index],
+                    itemBuilder: (context, index, realIndex) => InkWell(
+                      onTap: () {
+                        context.read<MusicProvider>().changIndex(index);
+                        Navigator.pushNamed(context, "MusicPlayer");
+                      },
+                      child: Container(
+                        height: MediaQuery.sizeOf(context).height * 0.13,
+                        width: MediaQuery.sizeOf(context).width * 0.80,
+                        color: Colors.primaries[index],
+                        child: Image.asset("${providerR!.musicList[index].image}",fit: BoxFit.cover,),
+                      ),
                     ),
                     options: CarouselOptions(
                         onPageChanged: (index, reason) {
