@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:media_booster/screen/music/view/music_screen.dart';
 import 'package:media_booster/screen/video/view/video_player_screen.dart';
+import 'package:media_booster/screen/video/view/video_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/dash_provider.dart';
@@ -23,7 +24,7 @@ class _DashScreenState extends State<DashScreen> {
     providerW=context.watch<DashProvider>();
     List<Widget>screen=[
       const MusicScreen(),
-      const VideoPlayerScreen(),
+      const VideoScreen(),
     ];
     return SafeArea(
       child: Scaffold(
@@ -31,8 +32,8 @@ class _DashScreenState extends State<DashScreen> {
         bottomNavigationBar: CurvedNavigationBar(
           // currentIndex: providerR!.stepIndex,
           index: providerR!.stepIndex,
-          backgroundColor:  const Color(0xff1e1d21ff),
-          color: Colors.green.shade900,
+          backgroundColor: Colors.grey.shade900,
+          color: Colors.blueGrey.shade900,
           onTap: (value) {
             int i = value;
             providerR!.changeStep(i);

@@ -42,9 +42,9 @@ class _MusicScreenState extends State<MusicScreen> {
                       },
                       child: Container(
                         height: MediaQuery.sizeOf(context).height * 0.13,
-                        width: MediaQuery.sizeOf(context).width * 0.80,
+                        width: MediaQuery.sizeOf(context).width * 0.75,
                         color: Colors.primaries[index],
-                        child: Image.asset("${providerR!.musicList[index].image}",fit: BoxFit.cover,),
+                        child: Image.asset("${providerR!.musicList[index].image}",fit: BoxFit.fill,),
                       ),
                     ),
                     options: CarouselOptions(
@@ -68,7 +68,7 @@ class _MusicScreenState extends State<MusicScreen> {
                       effect: const WormEffect(
                         dotHeight: 10,
                         dotWidth: 10,
-                        activeDotColor: Colors.green,
+                        activeDotColor: Colors.blue,
                         dotColor: Colors.grey,
                         // type: WormType.thinUnderground
                       ),

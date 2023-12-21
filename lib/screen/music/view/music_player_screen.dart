@@ -18,15 +18,38 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    player.open(
+    // player.open(
+    //     Audio(
+    //         "${context.read<MusicProvider>().musicList[context.read<MusicProvider>().index].music}"),
+    //     autoStart: false,
+    //     showNotification: true);
+    //
+    // player.current.listen((event) {
+    //   Duration d1 = event!.audio.duration;
+    //   context.read<MusicProvider>().changTotalDuration(d1);
+    // });
+    loadSong();
+  }
+
+  void loadSong() {
+    context.read<MusicProvider>().player.open(
         Audio(
             "${context.read<MusicProvider>().musicList[context.read<MusicProvider>().index].music}"),
         autoStart: false,
         showNotification: true);
 
-    player.current.listen((event) {
+    context.read<MusicProvider>().player.current.listen((event) {
       Duration d1 = event!.audio.duration;
       context.read<MusicProvider>().changTotalDuration(d1);
+    });
+    liveDuration();
+  }
+
+  void liveDuration() {
+    context.read<MusicProvider>().player.currentPosition.listen((event) {
+      if (context.read<MusicProvider>().player.stopped) {
+        context.read<MusicProvider>().checkStatus(false);
+      }
     });
   }
 
@@ -97,7 +120,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                     child: Slider(
                       value: position.inSeconds.toDouble(),
                       onChanged: (value) {
-                        player.seek(Duration(seconds: value.toInt()));
+                        context.read<MusicProvider>().player.seek(Duration(seconds: value.toInt()));
                       },
                       min: 0,
                       max: providerR!.totalDuration.inSeconds.toDouble(),
@@ -129,7 +152,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                       size: 20,
                     )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (providerR!.index > 0) {
+                        providerR!.changIndex(--providerR!.index);
+                      }
+                      loadSong();
+                    },
                     icon: const Icon(
                       Icons.skip_previous,
                       size: 40,
@@ -137,10 +165,10 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                 IconButton(
                   onPressed: () {
                     if (providerR!.isPlay == false) {
-                      player.play();
+                      context.read<MusicProvider>().player.play();
                       providerR!.checkStatus(true);
                     } else {
-                      player.pause();
+                      context.read<MusicProvider>().player.pause();
                       providerR!.checkStatus(false);
                     }
                   },
@@ -150,7 +178,12 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                   ),
                 ),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (providerR!.index <  providerR!.musicList.length - 1) {
+                        providerR!.changIndex(++providerR!.index);
+                      }
+                      loadSong();
+                    },
                     icon: const Icon(
                       Icons.skip_next,
                       size: 40,

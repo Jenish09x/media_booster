@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../model/music_model.dart';
@@ -5,7 +6,7 @@ import '../model/music_model.dart';
 class  MusicProvider with ChangeNotifier
 {
   int storeIndex=0;
-
+  AssetsAudioPlayer player = AssetsAudioPlayer();
   void changeStepIndex(int i)
   {
     storeIndex=i;

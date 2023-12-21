@@ -40,6 +40,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   curved_navigation_bar: ^1.0.3
   assets_audio_player: ^3.1.1
+  video_player: ^2.8.1
+  chewie: ^1.7.4
 
 
 dev_dependencies:
@@ -72,6 +74,8 @@ flutter:
   assets:
     - assets/images/
     - assets/music/
+    - assets/logo/
+    - assets/video/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
