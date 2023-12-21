@@ -11,23 +11,12 @@ class MusicPlayerScreen extends StatefulWidget {
 }
 
 class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
-  AssetsAudioPlayer player = AssetsAudioPlayer();
   MusicProvider? providerR;
   MusicProvider? providerW;
 
   @override
   void initState() {
     super.initState();
-    // player.open(
-    //     Audio(
-    //         "${context.read<MusicProvider>().musicList[context.read<MusicProvider>().index].music}"),
-    //     autoStart: false,
-    //     showNotification: true);
-    //
-    // player.current.listen((event) {
-    //   Duration d1 = event!.audio.duration;
-    //   context.read<MusicProvider>().changTotalDuration(d1);
-    // });
     loadSong();
   }
 
@@ -112,7 +101,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
               ),
             ),
             PlayerBuilder.currentPosition(
-              player: player,
+              player: context.read<MusicProvider>().player,
               builder: (context, position) => Column(
                 children: [
                   SizedBox(
@@ -157,6 +146,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                         providerR!.changIndex(--providerR!.index);
                       }
                       loadSong();
+                      providerR!.isPlay=false;
                     },
                     icon: const Icon(
                       Icons.skip_previous,
@@ -183,6 +173,7 @@ class _MusicPlayerScreenState extends State<MusicPlayerScreen> {
                         providerR!.changIndex(++providerR!.index);
                       }
                       loadSong();
+                      providerR!.isPlay=false;
                     },
                     icon: const Icon(
                       Icons.skip_next,
