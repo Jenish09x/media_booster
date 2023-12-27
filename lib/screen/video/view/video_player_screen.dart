@@ -20,15 +20,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<VideoProvider>().videoPlayerController =
-    VideoPlayerController.asset(
-        '${context.read<VideoProvider>().videoList[context.read<VideoProvider>().index].video}')
+    context
+        .read<VideoProvider>()
+        .videoPlayerController =
+    VideoPlayerController.asset('${context.read<VideoProvider>().videoList[context.read<VideoProvider>().index].video}')
       ..initialize().then((value) {
         setState(() {});
       });
-    context.read<VideoProvider>().controller = ChewieController(
+    context
+        .read<VideoProvider>()
+        .controller = ChewieController(
         videoPlayerController:
-        context.read<VideoProvider>().videoPlayerController!);
+        context
+            .read<VideoProvider>()
+            .videoPlayerController!);
   }
 
   @override
@@ -37,26 +42,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     providerW = context.watch<VideoProvider>();
 
     return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              '${providerW!.videoList[providerW!.index].title}',
-              style: const TextStyle(color: Colors.white),
-            ),
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: Colors.black,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            '${providerW!.videoList[providerW!.index].title}',
+            style: const TextStyle(color: Colors.white),
           ),
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.black,
-          body: Center(
-            child: SizedBox(
-              height: 350,
-              width: double.infinity,
-              child:
-              Chewie(controller: context.read<VideoProvider>().controller!),
-            ),
+        ),
+        backgroundColor: Colors.black,
+        body: Center(
+          child: SizedBox(
+            height: 350,
+            width: double.infinity,
+            child:
+            Chewie(controller: context
+                .read<VideoProvider>()
+                .controller!),
           ),
         ),
-      );
+      ),
+    );
   }
 }
